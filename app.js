@@ -27,7 +27,9 @@ function mainMenu() {
                 return "Please enter a valid name";
             }
         }]).then(answers => {
-
+            const manager = new Manager(answers.manager,)
+            teamMembers.push(manager);
+            idArray.push(answers.managerId)
         })
     }
 }
