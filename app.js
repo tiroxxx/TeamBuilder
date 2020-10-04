@@ -14,6 +14,7 @@ const teamMembers = [];
 const idArray = [];
 
 function mainMenu() {
+    // creating manager and all of its characteristics
     function createManager() {
         console.log("Let's build your team");
         inquirer.prompt([{
@@ -32,7 +33,11 @@ function mainMenu() {
             idArray.push(answers.managerId)
         })
     }
+
+    createManager();
 }
+
+mainMenu();
 
 
 
