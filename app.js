@@ -82,12 +82,59 @@ function createTeam() {
         if (answers.employeeType === "Engineer") {
             createEngineer();
         }
-        else if(answers.employeeType === "Intern") {
+        else if (answers.employeeType === "Intern") {
             createEngineer();
         }
-        else{
+        else {
             return;
         }
+    })
+}
+
+function createEngineer() {
+    inquirer.prompt([{
+        type: "input",
+        name: "engineerName",
+        message: "What is your engineer's name?",
+        validate: answer => {
+            if (answer !== "") {
+                return true;
+            }
+            return ("Please enter a valid name")
+        },
+        type: "input",
+        name: "engineerId",
+        message: "What is your engineer's ID?",
+        validate: answer => {
+            if (parseInt(answer) >= 0) {
+                return true;
+            }
+            return "IDs must be positive numbers"
+        },
+        type: "input",
+        name: "engineerEmail",
+        message: "What is your Engineer's email",
+        validate: answer => {
+            if (answer !== "") {
+                return true;
+            }
+            return "Enter a valid email";
+        },
+        type: "input",
+        name: "engineerGithub",
+        message: "What is your Engineer's github",
+        validate: answer => {
+            if (answer !== "") {
+                return true;
+            }
+            return "Enter a valid Github";
+        }
+    }]).then(answers => {
+        const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, engineerGithub);
+        teamMembers.push(engineer);
+        idArray.push(answers.engineerId)
+        // creating the rest of the employess
+        createTeam();
     })
 }
 
