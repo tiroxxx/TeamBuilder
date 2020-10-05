@@ -16,12 +16,12 @@ const idArray = [];
 function mainMenu() {
     // creating manager and all of its characteristics
     createManager();
-    // adding all the team members to the html
-    const renderedHtml = render(teamMembers);
-    fs.writeFile(outputPath, renderedHtml, function(err){
-        if(err) throw err;
-        console.log("Team Members, Assemble!");
-    })
+    //adding all the team members to the html
+    // const renderedHtml = render(teamMembers);
+    // fs.writeFile(outputPath, renderedHtml, function(err){
+    //     if(err) throw err;
+    //     console.log("Team Members, Assemble!");
+    // })
 }
 
 mainMenu();
@@ -29,58 +29,65 @@ mainMenu();
 
 function createManager() {
     console.log("Let's build your engineering team");
-    inquirer.prompt([{
-        type: "input",
-        name: "managerName",
-        message: "What is the manager's name?",
-        validate: answer => {
-            // checking for empty input
-            if (answer !== "") {
-                return true;
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "managerName",
+            message: "What is the manager's name?",
+            validate: answer => {
+                // checking for empty input
+                if (answer !== "") {
+                    return true;
+                }
+                return "Please enter a valid name";
             }
-            return "Please enter a valid name";
         },
-        type: "input",
-        name: "managerId",
-        message: "What is the manager's id?",
-        validate: answer => {
-            // checking for negative input
-            if (parseInt(answer) >= 0) {
-                return true;
-            }
-            return "IDs must be positive numbers";
+        {
+            type: "input",
+            name: "managerId",
+            message: "What is the manager's id?",
+            validate: answer => {
+                // checking for negative input
+                if (parseInt(answer) >= 0) {
+                    return true;
+                }
+                return "IDs must be positive numbers";
+            },
         },
-        type: "input",
-        name: "managerEmail",
-        message: "What is the manager's email?",
-        validate: answer => {
-            // checking for empty input
-            if (answer !== "") {
-                return true;
-            }
-            return "Enter a valid email";
+        {
+            type: "input",
+            name: "managerEmail",
+            message: "What is the manager's email?",
+            validate: answer => {
+                // checking for empty input
+                if (answer !== "") {
+                    return true;
+                }
+                return "Enter a valid email";
+            },
         },
-        type: "input",
-        name: "managerOffice",
-        message: "What is the manager's office?",
-        validate: answer => {
-            // checking for negative input
-            if (parseInt(answer) >= 0) {
-                return true;
+        {
+            type: "input",
+            name: "managerOffice",
+            message: "What is the manager's office?",
+            validate: answer => {
+                // checking for negative input
+                if (parseInt(answer) >= 0) {
+                    return true;
+                }
+                return "Enter a valid email";
             }
-            return "Enter a valid email";
-        }
 
-    }]).then(answers => {
-        const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, managerOffice);
-        // adding manager to the list of employees
-        teamMembers.push(manager);
-        // storing manager's ID
-        idArray.push(answers.managerId)
-        // creating the rest of the employees
-        createTeam();
+        }]).then(answers => {
+            const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOffice);
+            // adding manager to the list of employees
+            teamMembers.push(manager);
+            // storing manager's ID
+            idArray.push(answers.managerId)
+            // creating the rest of the employees
+            createTeam();
 
-    })
+        })
 }
 
 function createTeam() {
@@ -107,107 +114,121 @@ function createTeam() {
 }
 
 function createEngineer() {
-    inquirer.prompt([{
-        type: "input",
-        name: "engineerName",
-        message: "What is your engineer's name?",
-        validate: answer => {
-            // checking for empty input
-            if (answer !== "") {
-                return true;
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "engineerName",
+            message: "What is your engineer's name?",
+            validate: answer => {
+                // checking for empty input
+                if (answer !== "") {
+                    return true;
+                }
+                return ("Please enter a valid name")
             }
-            return ("Please enter a valid name")
         },
-        type: "input",
-        name: "engineerId",
-        message: "What is your engineer's ID?",
-        validate: answer => {
-            // checking for negative input
-            if (parseInt(answer) >= 0) {
-                return true;
+        {
+            type: "input",
+            name: "engineerId",
+            message: "What is your engineer's ID?",
+            validate: answer => {
+                // checking for negative input
+                if (parseInt(answer) >= 0) {
+                    return true;
+                }
+                return "IDs must be positive numbers"
             }
-            return "IDs must be positive numbers"
         },
-        type: "input",
-        name: "engineerEmail",
-        message: "What is your Engineer's email",
-        validate: answer => {
-            // checking for empty input
-            if (answer !== "") {
-                return true;
+        {
+            type: "input",
+            name: "engineerEmail",
+            message: "What is your Engineer's email",
+            validate: answer => {
+                // checking for empty input
+                if (answer !== "") {
+                    return true;
+                }
+                return "Enter a valid email";
             }
-            return "Enter a valid email";
         },
-        type: "input",
-        name: "engineerGithub",
-        message: "What is your Engineer's github",
-        validate: answer => {
-            // checking for empty input
-            if (answer !== "") {
-                return true;
+        {
+            type: "input",
+            name: "engineerGithub",
+            message: "What is your Engineer's github",
+            validate: answer => {
+                // checking for empty input
+                if (answer !== "") {
+                    return true;
+                }
+                return "Enter a valid Github";
             }
-            return "Enter a valid Github";
-        }
-    }]).then(answers => {
-        const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, engineerGithub);
-        // adding new engineer to list of employess
-        teamMembers.push(engineer);
-        // storing engineer's ID
-        idArray.push(answers.engineerId)
-        createTeam();
-    })
+        }]).then(answers => {
+            const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, engineerGithub);
+            // adding new engineer to list of employess
+            teamMembers.push(engineer);
+            // storing engineer's ID
+            idArray.push(answers.engineerId)
+            createTeam();
+        })
 }
 
 function createIntern() {
-    inquirer.prompt([{
-        type: "input",
-        name: "internName",
-        message: "What is your intern's name?",
-        validate: answer => {
-            // checking for empty input
-            if (answer !== "") {
-                return true;
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "internName",
+            message: "What is your intern's name?",
+            validate: answer => {
+                // checking for empty input
+                if (answer !== "") {
+                    return true;
+                }
+                return ("Please enter a valid name")
             }
-            return ("Please enter a valid name")
         },
-        type: "input",
-        name: "internId",
-        message: "What is your intern's ID?",
-        validate: answer => {
-            // checking for negative input
-            if (parseInt(answer) >= 0) {
-                return true;
+        {
+            type: "input",
+            name: "internId",
+            message: "What is your intern's ID?",
+            validate: answer => {
+                // checking for negative input
+                if (parseInt(answer) >= 0) {
+                    return true;
+                }
+                return "IDs must be positive numbers"
             }
-            return "IDs must be positive numbers"
         },
-        type: "input",
-        name: "internEmail",
-        message: "What is your intern's email",
-        validate: answer => {
-            // checking for empty input
-            if (answer !== "") {
-                return true;
+        {
+            type: "input",
+            name: "internEmail",
+            message: "What is your intern's email",
+            validate: answer => {
+                // checking for empty input
+                if (answer !== "") {
+                    return true;
+                }
+                return "Enter a valid email";
             }
-            return "Enter a valid email";
         },
-        type: "input",
-        name: "internSchool",
-        message: "What is your intern's school",
-        validate: answer => {
-            // checking for empty input
-            if (answer !== "") {
-                return true;
+        {
+            type: "input",
+            name: "internSchool",
+            message: "What is your intern's school",
+            validate: answer => {
+                // checking for empty input
+                if (answer !== "") {
+                    return true;
+                }
+                return "Enter a valid school";
             }
-            return "Enter a valid school";
-        }
-    }]).then(answers => {
-        const intern = new Intern(answers.internName, answers.internId, answers.internEmail, internSchool);
-        // adding intern to list of employees
-        teamMembers.push(engineer);
-        // storing intern's ID
-        idArray.push(answers.internId)
-        createTeam();
-    })
+        }]).then(answers => {
+            const intern = new Intern(answers.internName, answers.internId, answers.internEmail, internSchool);
+            // adding intern to list of employees
+            teamMembers.push(engineer);
+            // storing intern's ID
+            idArray.push(answers.internId)
+            createTeam();
+        })
 }
 
 // After the user has input all employees desired, call the `render` function (required
