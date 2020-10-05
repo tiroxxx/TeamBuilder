@@ -163,7 +163,7 @@ function createEngineer() {
                 return "Enter a valid Github";
             }
         }]).then(answers => {
-            const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, engineerGithub);
+            const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerGithub);
             // adding new engineer to list of employess
             teamMembers.push(engineer);
             // storing engineer's ID
@@ -222,7 +222,7 @@ function createIntern() {
                 return "Enter a valid school";
             }
         }]).then(answers => {
-            const intern = new Intern(answers.internName, answers.internId, answers.internEmail, internSchool);
+            const intern = new Intern(answers.internName, answers.internId, answers.internEmail, answers.internSchool);
             // adding intern to list of employees
             teamMembers.push(engineer);
             // storing intern's ID
