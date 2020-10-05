@@ -61,19 +61,34 @@ function createManager() {
             return "Enter a valid email";
         }
 
-
     }]).then(answers => {
         const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, managerOffice);
         teamMembers.push(manager);
         idArray.push(answers.managerId)
         // creating the rest of the employess
         createTeam();
-
     })
 }
 
 function createTeam() {
-
+    inquirer.prompt([{
+        type: "list",
+        name: "employeeType",
+        message: "Which type of team member would you like to add?",
+        choices: [
+            "Engineer", "Intern", "I don't want to add any more employees"
+        ]
+    }]).then(answers => {
+        if (answers.employeeType === "Engineer") {
+            createEngineer();
+        }
+        else if(answers.employeeType === "Intern") {
+            createEngineer();
+        }
+        else{
+            return;
+        }
+    })
 }
 
 
