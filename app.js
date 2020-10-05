@@ -28,6 +28,7 @@ function createManager() {
         name: "managerName",
         message: "What is the manager's name?",
         validate: answer => {
+            // checking for empty input
             if (answer !== "") {
                 return true;
             }
@@ -37,6 +38,7 @@ function createManager() {
         name: "managerId",
         message: "What is the manager's id?",
         validate: answer => {
+            // checking for negative input
             if (parseInt(answer) >= 0) {
                 return true;
             }
@@ -46,6 +48,7 @@ function createManager() {
         name: "managerEmail",
         message: "What is the manager's email?",
         validate: answer => {
+            // checking for empty input
             if (answer !== "") {
                 return true;
             }
@@ -55,6 +58,7 @@ function createManager() {
         name: "managerOffice",
         message: "What is the manager's office?",
         validate: answer => {
+            // checking for negative input
             if (parseInt(answer) >= 0) {
                 return true;
             }
@@ -63,10 +67,13 @@ function createManager() {
 
     }]).then(answers => {
         const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, managerOffice);
+        // adding manager to the list of employees
         teamMembers.push(manager);
+        // storing manager's ID
         idArray.push(answers.managerId)
         // creating the rest of the employess
         createTeam();
+
     })
 }
 
@@ -99,6 +106,7 @@ function createEngineer() {
         name: "engineerName",
         message: "What is your engineer's name?",
         validate: answer => {
+            // checking for empty input
             if (answer !== "") {
                 return true;
             }
@@ -108,6 +116,7 @@ function createEngineer() {
         name: "engineerId",
         message: "What is your engineer's ID?",
         validate: answer => {
+            // checking for negative input
             if (parseInt(answer) >= 0) {
                 return true;
             }
@@ -117,6 +126,7 @@ function createEngineer() {
         name: "engineerEmail",
         message: "What is your Engineer's email",
         validate: answer => {
+            // checking for empty input
             if (answer !== "") {
                 return true;
             }
@@ -126,6 +136,7 @@ function createEngineer() {
         name: "engineerGithub",
         message: "What is your Engineer's github",
         validate: answer => {
+            // checking for empty input
             if (answer !== "") {
                 return true;
             }
@@ -133,18 +144,21 @@ function createEngineer() {
         }
     }]).then(answers => {
         const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, engineerGithub);
+        // adding new engineer to list of employess
         teamMembers.push(engineer);
+        // storing engineer's ID
         idArray.push(answers.engineerId)
         createTeam();
     })
 }
 
-function createEngineer() {
+function createIntern() {
     inquirer.prompt([{
         type: "input",
         name: "internName",
         message: "What is your intern's name?",
         validate: answer => {
+            // checking for empty input
             if (answer !== "") {
                 return true;
             }
@@ -154,6 +168,7 @@ function createEngineer() {
         name: "internId",
         message: "What is your intern's ID?",
         validate: answer => {
+            // checking for negative input
             if (parseInt(answer) >= 0) {
                 return true;
             }
@@ -163,6 +178,7 @@ function createEngineer() {
         name: "internEmail",
         message: "What is your intern's email",
         validate: answer => {
+            // checking for empty input
             if (answer !== "") {
                 return true;
             }
@@ -172,6 +188,7 @@ function createEngineer() {
         name: "internSchool",
         message: "What is your intern's school",
         validate: answer => {
+            // checking for empty input
             if (answer !== "") {
                 return true;
             }
@@ -179,7 +196,9 @@ function createEngineer() {
         }
     }]).then(answers => {
         const intern = new Intern(answers.internName, answers.internId, answers.internEmail, internSchool);
+        // adding intern to list of employees
         teamMembers.push(engineer);
+        // storing intern's ID
         idArray.push(answers.internId)
         createTeam();
     })
