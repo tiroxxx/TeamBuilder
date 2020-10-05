@@ -15,30 +15,66 @@ const idArray = [];
 
 function mainMenu() {
     // creating manager and all of its characteristics
-    function createManager() {
-        console.log("Let's build your team");
-        inquirer.prompt([{
-            type: "input",
-            name: "manager",
-            message: "What is the manager's name?",
-            validate: answer => {
-                if (answer !== "") {
-                    return true;
-                }
-                return "Please enter a valid name";
-            }
-        }]).then(answers => {
-            const manager = new Manager(answers.manager,)
-            teamMembers.push(manager);
-            idArray.push(answers.managerId)
-        })
-    }
-
     createManager();
 }
 
 mainMenu();
 
+
+function createManager() {
+    console.log("Let's build your team");
+    inquirer.prompt([{
+        type: "input",
+        name: "managerName",
+        message: "What is the manager's name?",
+        validate: answer => {
+            if (answer !== "") {
+                return true;
+            }
+            return "Please enter a valid name";
+        },
+        type: "input",
+        name: "managerId",
+        message: "What is the manager's id?",
+        validate: answer => {
+            if (parseInt(answer) >= 0) {
+                return true;
+            }
+            return "IDs must be positive numbers";
+        },
+        type: "input",
+        name: "managerEmail",
+        message: "What is the manager's email?",
+        validate: answer => {
+            if (answer !== "") {
+                return true;
+            }
+            return "Enter a valid email";
+        },
+        type: "input",
+        name: "managerOffice",
+        message: "What is the manager's office?",
+        validate: answer => {
+            if (parseInt(answer) >= 0) {
+                return true;
+            }
+            return "Enter a valid email";
+        }
+
+
+    }]).then(answers => {
+        const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, managerOffice);
+        teamMembers.push(manager);
+        idArray.push(answers.managerId)
+        // creating the rest of the employess
+        createTeam();
+
+    })
+}
+
+function createTeam() {
+
+}
 
 
 
