@@ -16,6 +16,13 @@ const idArray = [];
 function mainMenu() {
     // creating manager and all of its characteristics
     createManager();
+    // adding all the team members to the html
+    const renderedHtml = render(teamMembers);
+    fs.writeFile(outputPath, renderedHtml, function(err){
+        if(err) throw err;
+        console.log("Team Members, Assemble!");
+    })
+
 }
 
 mainMenu();
@@ -71,7 +78,7 @@ function createManager() {
         teamMembers.push(manager);
         // storing manager's ID
         idArray.push(answers.managerId)
-        // creating the rest of the employess
+        // creating the rest of the employees
         createTeam();
 
     })
@@ -203,11 +210,6 @@ function createIntern() {
         createTeam();
     })
 }
-
-
-
-// Write code to use inquirer to gather information about the development team members,
-// and to create objects for each team member (using the correct classes as blueprints!)
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
