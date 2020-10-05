@@ -22,14 +22,13 @@ function mainMenu() {
         if(err) throw err;
         console.log("Team Members, Assemble!");
     })
-
 }
 
 mainMenu();
 
 
 function createManager() {
-    console.log("Let's build your team");
+    console.log("Let's build your engineering team");
     inquirer.prompt([{
         type: "input",
         name: "managerName",
