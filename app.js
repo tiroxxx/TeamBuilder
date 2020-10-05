@@ -224,7 +224,7 @@ function createIntern() {
         }]).then(answers => {
             const intern = new Intern(answers.internName, answers.internId, answers.internEmail, answers.internSchool);
             // adding intern to list of employees
-            teamMembers.push(engineer);
+            teamMembers.push(intern);
             // storing intern's ID
             idArray.push(answers.internId)
             createTeam();
