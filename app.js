@@ -80,10 +80,12 @@ function createTeam() {
         ]
     }]).then(answers => {
         if (answers.employeeType === "Engineer") {
+            // creating an engineer employee
             createEngineer();
         }
         else if (answers.employeeType === "Intern") {
-            createEngineer();
+            // creating an intern employee
+            createIntern();
         }
         else {
             return;
@@ -133,7 +135,52 @@ function createEngineer() {
         const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, engineerGithub);
         teamMembers.push(engineer);
         idArray.push(answers.engineerId)
-        // creating the rest of the employess
+        createTeam();
+    })
+}
+
+function createEngineer() {
+    inquirer.prompt([{
+        type: "input",
+        name: "internName",
+        message: "What is your intern's name?",
+        validate: answer => {
+            if (answer !== "") {
+                return true;
+            }
+            return ("Please enter a valid name")
+        },
+        type: "input",
+        name: "internId",
+        message: "What is your intern's ID?",
+        validate: answer => {
+            if (parseInt(answer) >= 0) {
+                return true;
+            }
+            return "IDs must be positive numbers"
+        },
+        type: "input",
+        name: "internEmail",
+        message: "What is your intern's email",
+        validate: answer => {
+            if (answer !== "") {
+                return true;
+            }
+            return "Enter a valid email";
+        },
+        type: "input",
+        name: "internSchool",
+        message: "What is your intern's school",
+        validate: answer => {
+            if (answer !== "") {
+                return true;
+            }
+            return "Enter a valid school";
+        }
+    }]).then(answers => {
+        const intern = new Intern(answers.internName, answers.internId, answers.internEmail, internSchool);
+        teamMembers.push(engineer);
+        idArray.push(answers.internId)
         createTeam();
     })
 }
