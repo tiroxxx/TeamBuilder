@@ -68,6 +68,7 @@ function createManager() {
                 if (parseInt(answer) >= 0) {
                     return true;
                 }
+                
                 return "Enter a valid email";
             }
         }]).then(answers => {
@@ -129,11 +130,15 @@ function createEngineer() {
             name: "engineerId",
             message: "What is your engineer's ID?",
             validate: answer => {
+                // checking if the ID has already been used
+                if(idArray.includes(answer)){
+                    return "ID already used";
+                }
                 // checking for negative input
                 if (parseInt(answer) >= 0) {
                     return true;
                 }
-                return "IDs must be positive numbers"
+                return "IDs must be positive numbers";
             }
         },
         {
@@ -188,6 +193,10 @@ function createIntern() {
             name: "internId",
             message: "What is your intern's ID?",
             validate: answer => {
+                // checking if the ID has already been used
+                if(idArray.includes(answer)){
+                    return "ID already used";
+                }
                 // checking for negative input
                 if (parseInt(answer) >= 0) {
                     return true;
