@@ -69,7 +69,7 @@ function createManager() {
                     return true;
                 }
                 
-                return "Enter a valid email";
+                return "Office number should be a positive number";
             }
         }]).then(answers => {
             const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOffice);
