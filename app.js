@@ -16,12 +16,7 @@ const idArray = [];
 function mainMenu() {
     // creating manager and all of its characteristics
     createManager();
-    //adding all the team members to the html
-    // const renderedHtml = render(teamMembers);
-    // fs.writeFile(outputPath, renderedHtml, function(err){
-    //     if(err) throw err;
-    //     console.log("Team Members, Assemble!");
-    // })
+
 }
 
 mainMenu();
@@ -91,6 +86,7 @@ function createManager() {
 }
 
 function createTeam() {
+    // choosing what kind of employee to create
     inquirer.prompt([{
         type: "list",
         name: "employeeType",
@@ -108,7 +104,12 @@ function createTeam() {
             createIntern();
         }
         else {
-            return;
+            //adding all the team members to the html
+            const renderedHtml = render(teamMembers);
+            fs.writeFile(outputPath, renderedHtml, function (err) {
+                if (err) throw err;
+                console.log("Team Members, Assemble!");
+            })
         }
     })
 }
